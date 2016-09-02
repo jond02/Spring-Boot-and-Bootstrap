@@ -21,6 +21,11 @@ public class BootController {
             e.printStackTrace();
         }
 
-        return "Welcome to Spring in WA" + count++;
+        return "Welcome to Spring in WA: " + count++;
+    }
+
+    @RequestMapping("/boot-reset")
+    public void bootReset(){
+        count = 0;
     }
 }
