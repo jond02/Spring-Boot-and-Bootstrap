@@ -4,3 +4,4 @@ distantember.iml
 target/
 mvnw
 mvnw.cmd
+.env
