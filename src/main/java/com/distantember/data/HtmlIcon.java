@@ -3,16 +3,31 @@ package com.distantember.data;
 /**
  * Created by jondann on 9/2/16.
  */
-public class MtnRange {
+public class HtmlIcon {
 
     private String link;
     private String image;
     private String title;
+    private String alt;
 
-    public MtnRange(String link, String image, String title) {
+    public HtmlIcon(String link, String image, String title) {
+        //alt isn't specified, use title as alt text
+        this(link, image, title, title);
+    }
+
+    public HtmlIcon(String link, String image, String title, String alt) {
         this.link = link;
         this.image = image;
         this.title = title;
+        this.alt = alt;
+    }
+
+    public String getAlt() {
+        return alt;
+    }
+
+    public void setAlt(String alt) {
+        this.alt = alt;
     }
 
     public String getLink() {
