@@ -1,16 +1,40 @@
 body {
     font-family: 'Raleway', sans-serif;
+    padding-top: 80px;
 }
 
+/*
 .row {
     border: 1px solid red;
 }
 
-*[class^='col']{
+*[class^='col-']{
     border: 1px solid green;
 }
+*/
 
-header, footer {
+.navbar {
+    margin-bottom: 0px;
+    padding: 30px 15px;
+    transition: all 0.5s;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #bbb;
+}
+
+.navbar img {
+    width: 70%;
+    height: 70%;
+}
+
+.cbp-af-header-shrink {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    opacity: 0.9;
+}
+
+footer {
     background-color: #333;
     color: #ddd;
     padding: 20px;
@@ -80,3 +104,6 @@ article p {
     font-size: 16px;
 }
 
+@media (max-width: 767px){
+
+}

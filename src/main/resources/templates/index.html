@@ -6,55 +6,99 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
     <link th:href="@{css/index.css}" href="../static/css/index.css" rel="stylesheet"/>
+    <link th:href="@{css/minimit.css}" href="../static/css/minimit.css" rel="stylesheet" />
 </head>
 <body>
 
-    <header class="contanier-fluid">
-        <h1>Header</h1>
+    <header>
+
+        <!-- ============================================================================ -->
+        <!-- This content is only used for static prototyping purposes (natural templates)-->
+        <!-- and is therefore entirely optional, as this markup fragment will be included -->
+        <!-- from "fragments/header.html" at runtime.                                     -->
+        <!-- ============================================================================ -->
+
+        <nav th:include="nav::nav" class="navbar navbar-inverse navbar-fixed-top cbp-af-header">
+
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#top">
+                        <img th:src="@{img/site-logo-white.png}" src="../static/img/site-logo-white.png" />
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#sights">Sights</a></li>
+                        <li><a href="#sports">Sports</a></li>
+                        <li><a href="#activites">Activities</a></li>
+                        <li><a href="#contact">Contact</a></li>
+
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
     </header>
 
     <div class="container-fluid">
         <div class="row">
-            <aside class="col-sm-2">
+            <div class="row-height">
+                <!-- xs will be full screen for each col because it is not listed
+                    when sm is reached the first two cols will reorder, and all
+                    cols will be sized at the listed width going up to large.
+                    Bootstrap mobile first approach is to organize content for mobile, then
+                    adjust as screen gets larger-->
+                <section class="col-sm-height col-sm-8 col-sm-push-2">
 
-                <h4 class="range-title">
-                    <b>Mountain Ranges</b>
-                </h4>
+                    <article th:each="article : ${articles}">
+                        <h2 th:text="${article.title}">Why I Went Into The Lake</h2>
+                        <img th:src="${'img/' + article.image}" src="../static/img/lake.jpg" />
 
-                <div class="range-list">
-                    <a th:each="range : ${ranges}" th:href="${range.link}" href="#">
-                        <img th:src="${'img/' + range.image}" src="../static/img/range-1.png"/>
-                        <h4 th:text="${range.title}">Wasatch Range</h4>
-                    </a>
-                </div>
-
-            </aside>
-
-            <section class="col-sm-8">
-
-                <article th:each="article : ${articles}">
-                    <h2 th:text="${article.title}">Why I Went Into The Lake</h2>
-                    <img th:src="${'img/' + article.image}" src="../static/img/lake.jpg" />
-
-                    <div class="row">
-                        <p th:text="${article.description}" class="col-sm-10">
-                           At the lake we like to hike for a long time. It is refreshing and
-                            offers a great place to swim after the long hike. Sometimes we go kayaking.
-                        </p>
-                        <div class="col-sm-2">
-                            <input type="button" class="btn btn-primary" value="More..." />
+                        <div class="row">
+                            <p th:text="${article.description}" class="col-sm-10">
+                                At the lake we like to hike for a long time. It is refreshing and
+                                offers a great place to swim after the long hike. Sometimes we go kayaking.
+                            </p>
+                            <div class="col-sm-2">
+                                <input type="button" class="btn btn-primary" value="More..." />
+                            </div>
                         </div>
+                    </article>
+
+                </section>
+
+                <aside class="col-sm-height col-sm-2 col-sm-pull-8">
+
+                    <h4 class="range-title">
+                        <b>Mountain Ranges</b>
+                    </h4>
+
+                    <div class="range-list">
+                        <a th:each="range : ${ranges}" th:href="${range.link}" href="#">
+                            <img th:src="${'img/' + range.image}" src="../static/img/range-1.png"/>
+                            <h4 th:text="${range.title}">Wasatch Range</h4>
+                        </a>
                     </div>
-                </article>
 
-            </section>
+                </aside>
 
-            <aside class="sports-icon-list col-sm-2">
-                <a th:each="icon : ${icons}" th:href="${icon.link}" href="downhill.html">
-                    <img th:src="${'img/' + icon.image}" src="../static/img/icon-downhill.png" th:alt="${icon.alt}" alt="Downhill" />
-                    <h6 th:text="${icon.title}">Downhill</h6>
-                </a>
-            </aside>
+                <aside class="col-sm-height sports-icon-list col-sm-2">
+                    <a th:each="icon : ${icons}" th:href="${icon.link}" href="downhill.html">
+                        <img th:src="${'img/' + icon.image}" src="../static/img/icon-downhill.png" th:alt="${icon.alt}" alt="Downhill" />
+                        <h6 th:text="${icon.title}">Downhill</h6>
+                    </a>
+                </aside>
+            </div>
         </div>
     </div>
 
@@ -63,32 +107,37 @@
     </footer>
 
 
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script th:src="@{js/classie.js}" src="../static/js/classie.js"></script>
+    <script th:src="@{js/cbpAnimatedHeader.js}" src="../static/js/cbpAnimatedHeader.js"></script>
+
     <script>
 
-        $('#hello').on('click', function(){
+        $(function(){
 
-            $('#update').html('Please Wait');
-            $('#hello').toggle(false);
+            $('#hello').on('click', function(){
 
-            $.get('/boot', function(data){
+                $('#update').html('Please Wait');
+                $('#hello').toggle(false);
 
-                $('#update').html(data);
-                $('#hello').toggle(true);
+                $.get('/boot', function(data){
+
+                    $('#update').html(data);
+                    $('#hello').toggle(true);
+
+                });
+            });
+
+            $('#reset').on('click', function(){
+
+                $.get('/boot-reset', function(){
+                    $('#update').html('');
+                });
 
             });
+
         });
-
-        $('#reset').on('click', function(){
-
-            $.get('/boot-reset', function(){
-                $('#update').html('');
-            })
-
-        })
 
     </script>
 </body>
