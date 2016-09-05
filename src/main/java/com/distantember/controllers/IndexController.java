@@ -17,14 +17,6 @@ import java.util.List;
 @Controller
 public class IndexController {
 
-    private static final List<HtmlIcon> RANGES = new ArrayList<HtmlIcon>() {{
-        add(new HtmlIcon("wasatch-range.html","range-1.png","Wasatch Range"));
-        add(new HtmlIcon("mummy-range.html","range-2.png","Mummy Range"));
-        add(new HtmlIcon("front-range.html","range-3.png","Front Range"));
-        add(new HtmlIcon("cool-range.html","range-4.png","Cool Range"));
-        add(new HtmlIcon("sweet-range.html","range-5.png","Sweet Range"));
-    }};
-
     private static final List<HtmlArticle> ACTIVITIES = new ArrayList<HtmlArticle>() {{
         add(new HtmlArticle("Orienteering", "map.png",
                 "Use the wind, sun, and moss on the trees to orient yourself. It's a great skill to have!"));
@@ -33,6 +25,16 @@ public class IndexController {
         add(new HtmlArticle("Backpacking", "backpack.png",
                 "Grab your pack and hit the trail. You'll be happy that you did!"));
     }};
+
+    /*
+    private static final List<HtmlIcon> RANGES = new ArrayList<HtmlIcon>() {{
+        add(new HtmlIcon("wasatch-range.html","range-1.png","Wasatch Range"));
+        add(new HtmlIcon("mummy-range.html","range-2.png","Mummy Range"));
+        add(new HtmlIcon("front-range.html","range-3.png","Front Range"));
+        add(new HtmlIcon("cool-range.html","range-4.png","Cool Range"));
+        add(new HtmlIcon("sweet-range.html","range-5.png","Sweet Range"));
+    }};
+
 
     private static final List<HtmlArticle> ARTICLES= new ArrayList<HtmlArticle>() {{
         add(new HtmlArticle("Why I Went Into The Lake", "lake.jpg",
@@ -50,12 +52,13 @@ public class IndexController {
         add(new HtmlIcon("cross-country.html", "icon-cross-country.png", "Cross Country"));
         add(new HtmlIcon("biathlon.html", "icon-biathlon.png", "Biathlon"));
     }};
+    */
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model){
-        model.addAttribute("ranges", RANGES);
-        model.addAttribute("articles", ARTICLES);
-        model.addAttribute("icons", ICONS);
+        //model.addAttribute("ranges", RANGES);
+        //model.addAttribute("articles", ARTICLES);
+        //model.addAttribute("icons", ICONS);
         model.addAttribute("activities", ACTIVITIES);
         return "index";
     }
