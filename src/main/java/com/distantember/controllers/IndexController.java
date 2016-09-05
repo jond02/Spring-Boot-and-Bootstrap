@@ -25,7 +25,16 @@ public class IndexController {
         add(new HtmlIcon("sweet-range.html","range-5.png","Sweet Range"));
     }};
 
-    private static final List<HtmlArticle> ARTICLES = new ArrayList<HtmlArticle>() {{
+    private static final List<HtmlArticle> ACTIVITIES = new ArrayList<HtmlArticle>() {{
+        add(new HtmlArticle("Orienteering", "map.png",
+                "Use the wind, sun, and moss on the trees to orient yourself. It's a great skill to have!"));
+        add(new HtmlArticle("Rock Climbing", "pic.png",
+                "Climbing is an exhilarating way to experience the outdoors."));
+        add(new HtmlArticle("Backpacking", "backpack.png",
+                "Grab your pack and hit the trail. You'll be happy that you did!"));
+    }};
+
+    private static final List<HtmlArticle> ARTICLES= new ArrayList<HtmlArticle>() {{
         add(new HtmlArticle("Why I Went Into The Lake", "lake.jpg",
                 "At the lake we like to hike for a long time. It is refreshing and offers a great place to swim after the long hike. Sometimes we go kayaking."));
         add(new HtmlArticle("A Huge Elk", "elk.jpg",
@@ -47,6 +56,7 @@ public class IndexController {
         model.addAttribute("ranges", RANGES);
         model.addAttribute("articles", ARTICLES);
         model.addAttribute("icons", ICONS);
+        model.addAttribute("activities", ACTIVITIES);
         return "index";
     }
 

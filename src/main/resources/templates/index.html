@@ -12,13 +12,12 @@
 
     <header>
 
-        <!-- ============================================================================ -->
-        <!-- This content is only used for static prototyping purposes (natural templates)-->
-        <!-- and is therefore entirely optional, as this markup fragment will be included -->
-        <!-- from "fragments/header.html" at runtime.                                     -->
-        <!-- ============================================================================ -->
-
         <nav th:include="nav::nav" class="navbar navbar-inverse navbar-fixed-top cbp-af-header">
+
+            <!-- nav is only used for static prototyping purposes (natural templates)
+                and is therefore entirely optional, as this markup fragment will be included
+                at runtime.
+            -->
 
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -30,7 +29,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a href="#top">
-                        <img th:src="@{img/site-logo-white.png}" src="../static/img/site-logo-white.png" />
+                        <img th:src="@{img/site-logo-white-70pct.png}" src="../static/img/site-logo-white-70pct.png" />
                     </a>
                 </div>
 
@@ -51,55 +50,41 @@
     </header>
 
     <div class="container-fluid">
-        <div class="row">
-            <div class="row-height">
-                <!-- xs will be full screen for each col because it is not listed
-                    when sm is reached the first two cols will reorder, and all
-                    cols will be sized at the listed width going up to large.
-                    Bootstrap mobile first approach is to organize content for mobile, then
-                    adjust as screen gets larger-->
-                <section class="col-sm-height col-sm-8 col-sm-push-2">
-
-                    <article th:each="article : ${articles}">
-                        <h2 th:text="${article.title}">Why I Went Into The Lake</h2>
-                        <img th:src="${'img/' + article.image}" src="../static/img/lake.jpg" />
-
-                        <div class="row">
-                            <p th:text="${article.description}" class="col-sm-10">
-                                At the lake we like to hike for a long time. It is refreshing and
-                                offers a great place to swim after the long hike. Sometimes we go kayaking.
-                            </p>
-                            <div class="col-sm-2">
-                                <input type="button" class="btn btn-primary" value="More..." />
-                            </div>
-                        </div>
-                    </article>
-
-                </section>
-
-                <aside class="col-sm-height col-sm-2 col-sm-pull-8">
-
-                    <h4 class="range-title">
-                        <b>Mountain Ranges</b>
-                    </h4>
-
-                    <div class="range-list">
-                        <a th:each="range : ${ranges}" th:href="${range.link}" href="#">
-                            <img th:src="${'img/' + range.image}" src="../static/img/range-1.png"/>
-                            <h4 th:text="${range.title}">Wasatch Range</h4>
-                        </a>
-                    </div>
-
-                </aside>
-
-                <aside class="col-sm-height sports-icon-list col-sm-2">
-                    <a th:each="icon : ${icons}" th:href="${icon.link}" href="downhill.html">
-                        <img th:src="${'img/' + icon.image}" src="../static/img/icon-downhill.png" th:alt="${icon.alt}" alt="Downhill" />
-                        <h6 th:text="${icon.title}">Downhill</h6>
-                    </a>
-                </aside>
+        <section class="row">
+            <div class="fill-screen" th:style="'background-image: url(' + @{img/crystal-lake.jpg} + ')'" style="background-image: url(../static/img/crystal-lake.jpg)" >
             </div>
-        </div>
+        </section>
+        <section class="row text-banner">
+            <h1>VISIT MOUNT RAINIER NATIONAL PARK</h1>
+            <p>It'a a great place. Get there as soon as you can before the snow falls. You're sure to see wildlife.</p>
+        </section>
+
+        <section class="row">
+            <div class="fill-screen fixed-attachment" th:style="'background-image: url(' + @{img/deer.jpg} + ')'" style="background-image: url(../static/img/deer.jpg)" >
+            </div>
+        </section>
+
+        <section class="row activity-section">
+            <div th:each="activity : ${activities}" class="activity-element col-md-4">
+                <img th:src="@{'img/' + ${activity.image}}" src="../static/img/map.png" />
+                <h1 th:text="${activity.title}">Orienteering</h1>
+                <p th:text="${activity.description}">Use the wind, sun, and moss on the trees to orient yourself. It's a great skill to have!</p>
+            </div>
+        </section>
+
+        <section class="row">
+            <div class="fill-screen fixed-attachment" th:style="'background-image: url(' + @{img/mountains.jpg} + ')'" style="background-image: url(../static/img/mountains.jpg)" >
+            </div>
+        </section>
+
+        <section class="row contact-us">
+            <h1>CONTACT US</h1>
+            <p>Washington</p>
+            <p>Address line 1</p>
+            <p>Address Line 2</p>
+            <p>Address Line 3</p>
+        </section>
+
     </div>
 
     <footer class="container-fluid">
@@ -116,27 +101,39 @@
 
         $(function(){
 
-            $('#hello').on('click', function(){
-
-                $('#update').html('Please Wait');
-                $('#hello').toggle(false);
-
-                $.get('/boot', function(data){
-
-                    $('#update').html(data);
-                    $('#hello').toggle(true);
-
-                });
+            $(window).on('resize', function () {
+                fillScreen();
             });
 
-            $('#reset').on('click', function(){
+            function fillScreen(){
+                $('.fill-screen').css('height', window.innerHeight);
+            }
 
-                $.get('/boot-reset', function(){
-                    $('#update').html('');
-                });
+            fillScreen();
 
-            });
+            /*
+            //shift + command + up/down to move content
+             $('#hello').on('click', function(){
 
+             $('#update').html('Please Wait');
+             $('#hello').toggle(false);
+
+             $.get('/boot', function(data){
+
+             $('#update').html(data);
+             $('#hello').toggle(true);
+
+             });
+             });
+
+             $('#reset').on('click', function(){
+
+             $.get('/boot-reset', function(){
+             $('#update').html('');
+             });
+
+             });
+             */
         });
 
     </script>
