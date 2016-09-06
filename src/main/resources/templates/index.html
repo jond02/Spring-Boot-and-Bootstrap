@@ -4,10 +4,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>Distant Ember</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link th:href="@{css/animate.css}" href="../static/css/animate.css" rel="stylesheet" />
+    <link th:href="@{css/nanogallery.min.css}" href="../static/css/nanogallery.min.css" rel="stylesheet" />
     <link th:href="@{css/index.css}" href="../static/css/index.css" rel="stylesheet"/>
     <link th:href="@{css/minimit.css}" href="../static/css/minimit.css" rel="stylesheet" />
+
 </head>
 <body>
 
@@ -77,11 +80,74 @@
             </div>
         </section>
 
+        <section class="row">
+            <div id="carousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel" data-slide-to="1"></li>
+                    <li data-target="#carousel" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img th:src="@{img/scale-mountain.jpg}" src="../static/img/scale-mountain.jpg" alt="Scale Mountain" />
+                        <div class="carousel-caption">
+                            <h3>Scale the Mountain</h3>
+                            <p>Climb on!</p>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img th:src="@{img/sit-on-mountain.jpg}" src="../static/img/sit-on-mountain.jpg" alt="Sit Mountain" />
+                        <div class="carousel-caption">
+                            <h3>To the Top</h3>
+                            <p>So high</p>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img th:src="@{img/rockies.jpg}" src="../static/img/rockies.jpg" alt="Rockies" />
+                        <div class="carousel-caption">
+                            <h3>Mountains are Tall</h3>
+                            <p>So tall</p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </section>
+
         <section id="sports" class="row activity-section">
-            <div th:each="activity : ${activities}" class="activity-element col-md-4">
+            <div th:each="activity : ${activities}" class="activity-element col-md-4 wow fadeInLeft">
                 <img th:src="@{'img/' + ${activity.image}}" src="../static/img/map.png" />
                 <h1 th:text="${activity.title}">Orienteering</h1>
                 <p th:text="${activity.description}">Use the wind, sun, and moss on the trees to orient yourself. It's a great skill to have!</p>
+            </div>
+        </section>
+
+        <section class="row">
+            <div id="nanoGallery3">
+                <a th:href="@{img/buller-lake.jpg}" href="../static/img/buller-lake.jpg" th:attr="data-ngthumb=@{img/buller-lake.jpg}" data-ngthumb="../static/img/buller-lake.jpg">Buller Lake</a>
+                <a th:href="@{img/canada.jpg}" href="../static/img/canada.jpg" th:attr="data-ngthumb=@{img/canada.jpg}" data-ngthumb="../static/img/canada.jpg">Canadian Rockies</a>
+                <a th:href="@{img/landscape.jpg}" href="../static/img/landscape.jpg" th:attr="data-ngthumb=@{img/landscape.jpg}" data-ngthumb="../static/img/landscape.jpg">Landscape</a>
+                <a th:href="@{img/mountain-flowers.jpg}" href="../static/img/mountain-flowers.jpg" th:attr="data-ngthumb=@{img/mountain-flowers.jpg}" data-ngthumb="../static/img/mountain-flowers.jpg">Mountain Flowers</a>
+                <a th:href="@{img/road-sign.jpg}" href="../static/img/road-sign.jpg" th:attr="data-ngthumb=@{img/road-sign.jpg}" data-ngthumb="../static/img/road-sign.jpg">Icy Road Sign</a>
+                <a th:href="@{img/rockies.jpg}" href="../static/img/rockies.jpg" th:attr="data-ngthumb=@{img/rockies.jpg}" data-ngthumb="../static/img/rockies.jpg">Rockies</a>
+                <a th:href="@{img/scale-mountain.jpg}" href="../static/img/scale-mountain.jpg" th:attr="data-ngthumb=@{img/scale-mountain.jpg}" data-ngthumb="../static/img/scale-mountain.jpg">Scaling</a>
+                <a th:href="@{img/sit-on-mountain.jpg}" href="../static/img/sit-on-mountain.jpg" th:attr="data-ngthumb=@{img/sit-on-mountain.jpg}" data-ngthumb="../static/img/sit-on-mountain.jpg">Looking</a>
             </div>
         </section>
 
@@ -90,7 +156,7 @@
             </div>
         </section>
 
-        <section id="contact" class="row contact-us">
+        <section id="contact" class="row contact-us wow fadeInDown">
             <h1>CONTACT US</h1>
             <p>Washington</p>
             <p>Address line 1</p>
@@ -113,6 +179,8 @@
     <script th:src="@{js/cbpAnimatedHeader.js}" src="../static/js/cbpAnimatedHeader.js"></script>
     <script th:src="@{js/jquery.easing.js}" src="../static/js/jquery.easing.js" ></script>
     <script th:src="@{js/jquery.stellar.js}" src="../static/js/jquery.stellar.js" ></script>
+    <script th:src="@{js/wow.min.js}" src="../static/js/wow.min.js"></script>
+    <script th:src="@{js/jquery.nanogallery.min.js}" src="../static/js/jquery.nanogallery.min.js"></script>
 
     <script>
 
@@ -149,7 +217,11 @@
                 event.preventDefault();
             });
 
+            //init wow for element animation
+            new WOW().init();
 
+            //init nano gallery
+            $("#nanoGallery3").nanoGallery();
 
             /*
             //shift + command + up/down to move content
