@@ -4,13 +4,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>Distant Ember</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
     <link th:href="@{css/index.css}" href="../static/css/index.css" rel="stylesheet"/>
     <link th:href="@{css/minimit.css}" href="../static/css/minimit.css" rel="stylesheet" />
 </head>
 <body>
 
-    <header>
+    <header id="top">
 
         <nav th:include="nav::nav" class="navbar navbar-inverse navbar-fixed-top cbp-af-header">
 
@@ -37,9 +38,10 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#top">Home</a></li>
                         <li><a href="#sights">Sights</a></li>
                         <li><a href="#sports">Sports</a></li>
-                        <li><a href="#activites">Activities</a></li>
+                        <li><a href="#activities">Activities</a></li>
                         <li><a href="#contact">Contact</a></li>
 
                     </ul>
@@ -50,11 +52,22 @@
     </header>
 
     <div class="container-fluid">
-        <section class="row">
-            <div class="fill-screen" th:style="'background-image: url(' + @{img/crystal-lake.jpg} + ')'" style="background-image: url(../static/img/crystal-lake.jpg)" >
+        <section class="row title-row">
+            <div class="fill-screen stella-bg" data-stellar-background-ratio="0.1"
+                 th:style="'background-image: url(' + @{img/crystal-lake-dark.jpg} + ')'"
+                 style="background-image: url(../static/img/crystal-lake-dark.jpg)"
+            >
+                <img class="img-responsive title-image" th:src="@{img/site-logo-white.png}" src="../static/img/site-logo-white.png" alt="Rocky Mountain Outdoors" />
+
+                <div class="down-button">
+                    <a class="btn" href="#sights">
+                        <i class="fa fa-arrow-circle-down fa-5x"></i>
+                    </a>
+                </div>
+
             </div>
         </section>
-        <section class="row text-banner">
+        <section id="sights" class="row text-banner">
             <h1>VISIT MOUNT RAINIER NATIONAL PARK</h1>
             <p>It'a a great place. Get there as soon as you can before the snow falls. You're sure to see wildlife.</p>
         </section>
@@ -64,7 +77,7 @@
             </div>
         </section>
 
-        <section class="row activity-section">
+        <section id="sports" class="row activity-section">
             <div th:each="activity : ${activities}" class="activity-element col-md-4">
                 <img th:src="@{'img/' + ${activity.image}}" src="../static/img/map.png" />
                 <h1 th:text="${activity.title}">Orienteering</h1>
@@ -72,12 +85,12 @@
             </div>
         </section>
 
-        <section class="row">
+        <section id="activities" class="row">
             <div class="fill-screen fixed-attachment" th:style="'background-image: url(' + @{img/mountains.jpg} + ')'" style="background-image: url(../static/img/mountains.jpg)" >
             </div>
         </section>
 
-        <section class="row contact-us">
+        <section id="contact" class="row contact-us">
             <h1>CONTACT US</h1>
             <p>Washington</p>
             <p>Address line 1</p>
@@ -92,10 +105,14 @@
     </footer>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script th:src="@{js/jquery.migrate.js}" src="../static/js/jquery.migrate.js" ></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script th:src="@{js/classie.js}" src="../static/js/classie.js"></script>
     <script th:src="@{js/cbpAnimatedHeader.js}" src="../static/js/cbpAnimatedHeader.js"></script>
+    <script th:src="@{js/jquery.easing.js}" src="../static/js/jquery.easing.js" ></script>
+    <script th:src="@{js/jquery.stellar.js}" src="../static/js/jquery.stellar.js" ></script>
 
     <script>
 
@@ -110,6 +127,29 @@
             }
 
             fillScreen();
+
+            $(window).stellar();
+
+            //bootstrap scrollspy
+            $('body').scrollspy({
+                target: '.navbar',
+                offset: 160
+            });
+
+            $('nav a, .down-button a').bind('click', function(){
+
+                var x = 100;
+                if ($(this).attr('href') === '#activities'){
+                    x = 0;
+                }
+
+                $('html, body').stop().animate({
+                    scrollTop: $($(this).attr('href')).offset().top - x
+                }, 1500, 'easeInOutExpo');
+                event.preventDefault();
+            });
+
+
 
             /*
             //shift + command + up/down to move content
