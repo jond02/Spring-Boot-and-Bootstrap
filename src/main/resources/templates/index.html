@@ -131,7 +131,7 @@
         </section>
 
         <section id="sports" class="row activity-section">
-            <div th:each="activity : ${activities}" class="activity-element col-md-4 wow fadeInLeft">
+            <div th:each="activity : ${activities}" class="activity-element wow fadeInLeft">
                 <img th:src="@{'img/' + ${activity.image}}" src="../static/img/map.png" />
                 <h1 th:text="${activity.title}">Orienteering</h1>
                 <p th:text="${activity.description}">Use the wind, sun, and moss on the trees to orient yourself. It's a great skill to have!</p>
