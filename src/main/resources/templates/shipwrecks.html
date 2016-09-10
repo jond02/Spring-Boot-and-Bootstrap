@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title></title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link th:href="@{css/shipwreck.css}" href="../static/css/shipwreck.css" rel="stylesheet" />
+
+    <script id="ship-template" type="text/x-handlebars-template">
+        <div class="sel-ship">
+            <td><input class="btn btn-primary back-button" type="button" name="Back" value="Back" /></td>
+            <table class="table table-hover">
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Condition</th>
+                    <th>Depth</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Year Discovered</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{name}}</td>
+                        <td>{{description}}</td>
+                        <td>{{condition}}</td>
+                        <td>{{depth}}</td>
+                        <td>{{latitude}}</td>
+                        <td>{{longitude}}</td>
+                        <td>{{yearDiscovered}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </script>
+
+</head>
+<body>
+
+<nav  th:include="shipwreck-nav::nav" class="navbar navbar-inverse navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-site-navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#top">
+                <h2>My Site</h2>
+                <!-- <img th:src="@{img/demo.png}" src="../static/img/demo.png" /> -->
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-site-navbar-collapse">
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Page 1</a></li>
+                <li><a href="#">Page 2</a></li>
+                <li><a href="#">Page 3</a></li>
+                <li><a href="#">Page 4</a></li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div id="ship-page" class="container-fluid" style="margin-top: 75px;">
+
+    <div id="ship-list">
+        <input class="btn btn-primary" type="button" value="Add New Shipwreck" />
+
+        <h1>All Shipwrecks</h1>
+        <table class="table table-hover">
+            <tbody>
+                <tr th:each="ship : ${shipwrecks}">
+                    <td th:text="${ship.name}">data</td>
+                    <td th:text="${ship.description}">data</td>
+                    <td th:text="${ship.yearDiscovered}">data</td>
+                    <td><input class="btn btn-primary view-ship" type="button" th:name="${ship.id}" name="1" value="View" /></td>
+                    <td><input class="btn btn-danger delete-ship" type="button" th:name="${ship.id}" name="delete" value="Delete" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <section class="row ship-data">
+
+    </section>
+
+
+    <!--
+    <section class="row" th:each="d : ${demo.example}">
+
+        <div class="col-md-4">
+            <h1 th:text="${demo.title}">Hello</h1>
+        </div>
+        <div class="col-md-4">
+            <h1 th:style="'background-image: url(' + @{img/demo.jpg} + ')'">Hello</h1>
+        </div>
+        <div class="col-md-4">
+            <h1 th:attr="data-pic=@{img/demo.jpg}">Hello</h1>
+        </div>
+
+    </section>
+    -->
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script th:src="@{js/handlebars.js}" src="../static/js/handlebars.js"></script>
+<!--<script th:src="@{js/demo.js}" src="../static/js/demo.js"></script> -->
+
+<script>
+
+$(function(){
+
+    //get data on single ship
+    $('.view-ship').on('click', function(){
+        $.get('api/v1/shipwrecks/' + this.name, function(data){
+
+            //hide the list of ships
+            $('#ship-list').hide('fast', function(){
+
+                //show single ship data and add button events
+                var source = $('#ship-template').html();
+                var template = Handlebars.compile(source);
+                $('#ship-page').append(template(data));
+
+                //button event
+                $('.back-button').on('click', function(){
+
+                    $('.sel-ship').hide('fast', function(){
+                        $('#ship-list').show('fast');
+                    });
+                });
+            });
+        });
+    });
+
+});
+
+
+</script>
+
+</body>
+</html>

@@ -265,7 +265,7 @@
 
 			if (!this.options.parallaxElements) return;
 
-			this.$element.find('[data-stellar-ratio]').each(function(i) {
+			this.$element.find('[model-stellar-ratio]').each(function(i) {
 				var $this = $(this),
 					horizontalOffset,
 					verticalOffset,
@@ -359,7 +359,7 @@
 
 			if (!this.options.parallaxBackgrounds) return;
 
-			$backgroundElements = this.$element.find('[data-stellar-background-ratio]');
+			$backgroundElements = this.$element.find('[model-stellar-background-ratio]');
 
 			if (this.$element.data('stellar-background-ratio')) {
                 $backgroundElements = $backgroundElements.add(this.$element);

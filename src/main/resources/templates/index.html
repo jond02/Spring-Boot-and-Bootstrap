@@ -230,9 +230,9 @@
              $('#update').html('Please Wait');
              $('#hello').toggle(false);
 
-             $.get('/boot', function(data){
+             $.get('/boot', function(model){
 
-             $('#update').html(data);
+             $('#update').html(model);
              $('#hello').toggle(true);
 
              });

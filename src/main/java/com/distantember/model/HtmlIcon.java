@@ -1,4 +1,4 @@
-package com.distantember.data;
+package com.distantember.model;
 
 /**
  * Created by jondann on 9/2/16.
